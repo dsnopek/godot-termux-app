@@ -44,8 +44,8 @@ public class ProotTermuxShellEnvironment extends TermuxShellEnvironment {
         File prootLoader = new File(mLibDir, "libproot-loader.so");
         File prootLoader32 = new File(mLibDir, "libproot-loader32.so");
 
-        env.put("PROOT_LOADER", prootLoader.getAbsolutePath());
-        env.put("PROOT_LOADER_32", prootLoader32.getAbsolutePath());
+        //env.put("PROOT_LOADER", prootLoader.getAbsolutePath());
+        //env.put("PROOT_LOADER_32", prootLoader32.getAbsolutePath());
 
         return env;
     }

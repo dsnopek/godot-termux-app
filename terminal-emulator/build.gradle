@@ -34,10 +34,10 @@ android {
             path "src/main/jni/Android.mk"
         }
     }
-    
+
     sourceSets {
         main {
-            jniLibs.srcDirs += ['../thirdparty/proot/bin']
+            jniLibs.srcDirs += ['../thirdparty/proot/build/bin']
         }
     }
 
