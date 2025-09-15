@@ -84,9 +84,14 @@ popd > /dev/null
 (cd "$PROOT_DIR" && git checkout -- . && patch -p1 < "$SCRIPT_DIR/patches/string-header.patch") \
     || die "Unable to patch proot"
 
-CPPFLAGS="-I$TALLOC_DIR/include" LDFLAGS="-L$TALLOC_DIR/lib" make -C "$PROOT_DIR/src" CC="$ANDROID_CC" CROSS_COMPILE="$ANDROID_TOOLCHAIN/llvm-" V=1 proot \
+CPPFLAGS="-I$TALLOC_DIR/include" LDFLAGS="-L$TALLOC_DIR/lib" make -C "$PROOT_DIR/src" CC="$ANDROID_CC" CROSS_COMPILE="$ANDROID_TOOLCHAIN/llvm-" PROOT_UNBUNDLE_LOADER=1 HAS_LOADER_32BIT=1 V=1 proot \
     || die "Unable to build proot"
 
 mkdir -p "$BUILD_DIR/bin/arm64-v8a"
+
+cp "$PROOT_DIR/src/loader/loader" "$BUILD_DIR/bin/arm64-v8a/libproot-loader.so" \
+    || die "Unable to copy loader"
+cp "$PROOT_DIR/src/loader/loader-m32" "$BUILD_DIR/bin/arm64-v8a/libproot-loader32.so" \
+    || die "Unable to copy loader32"
 cp "$PROOT_DIR/src/proot" "$BUILD_DIR/bin/arm64-v8a/libproot.so" \
     || die "Unable to copy proot"
