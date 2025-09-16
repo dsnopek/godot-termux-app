@@ -35,9 +35,21 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            jniLibs.srcDirs += ['../thirdparty/proot/build/bin']
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
+    }
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging true
+        }
     }
 
     testOptions {
